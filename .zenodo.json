@@ -1,0 +1,17 @@
+{
+  "title": "Reproduction package: Measuring the impact of multi-signature self-custody on crypto-wallet usability and security perception",
+  "upload_type": "dataset",
+  "description": "<p>Pseudonymized data (n = 67), analysis scripts, notebooks, and outputs that reproduce every statistic, table, and figure in the Results section of the article <em>Measuring the impact of multi-signature self-custody on crypto-wallet usability and security perception</em>. The experiment is a between-subjects usability study of the <em>Shared-custody with Self</em> pattern: participants completed a cryptocurrency spending task with the Safe wallet on the Ethereum Sepolia test network under one of four treatments (single-signature on mobile or desktop, 2-of-2 multi-signature initiated on desktop or on mobile) and answered the System Usability Scale and a security-perception questionnaire.</p><p>The package is managed with uv (pinned Python 3.11 and dependency lock file). Run <code>uv sync</code>, <code>uv run scripts/analysis.py</code>, and <code>uv run scripts/verify.py</code> to regenerate and check all results. See README.md and data/CODEBOOK.md.</p>",
+  "creators": [
+    {"name": "Gindre, Francisco", "affiliation": "LIFIA, Facultad de Informática, Universidad Nacional de La Plata; CONICET"},
+    {"name": "Riva, María Florencia", "affiliation": "LIFIA, Facultad de Informática, Universidad Nacional de La Plata"},
+    {"name": "Clavería, Mariano G.", "affiliation": "Universidad Nacional de Quilmes"},
+    {"name": "Urbieta, Matías", "affiliation": "LIFIA, Facultad de Informática, Universidad Nacional de La Plata; CONICET; Universidad Nacional de Quilmes"},
+    {"name": "Rossi, Gustavo", "affiliation": "Universidad Abierta Interamericana"}
+  ],
+  "license": "CC-BY-4.0",
+  "access_right": "open",
+  "language": "eng",
+  "keywords": ["cryptocurrency", "self-custody", "multi-signature", "wallet", "usability", "System Usability Scale", "security perception", "empirical software engineering", "reproduction package"],
+  "notes": "Free-text participant comments and the raw Google Forms export are not included for privacy reasons and are available from the corresponding author on reasonable request."
+}
