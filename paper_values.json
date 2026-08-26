@@ -1,0 +1,450 @@
+{
+ "_comment": "Values as printed in the manuscript (Results section, August 2026 revision). Keys match output/values.json. tol = absolute tolerance used by scripts/verify.py.",
+ "sw_p": {
+  "paper": 0.00018478,
+  "tol": 1e-07,
+  "where": "Table Shapiro-Wilk of the SUS sample"
+ },
+ "sw_W": {
+  "paper": 0.9131,
+  "tol": 5e-05
+ },
+ "sus_mean": {
+  "paper": 72.612,
+  "tol": 0.0005
+ },
+ "sus_median": {
+  "paper": 77.5,
+  "tol": 1e-09
+ },
+ "sus_sd": {
+  "paper": 17.2297,
+  "tol": 5e-05
+ },
+ "sus_skew": {
+  "paper": -1.1621,
+  "tol": 5e-05
+ },
+ "sus_kurt": {
+  "paper": 1.4403,
+  "tol": 5e-05
+ },
+ "sw_T1_W": {
+  "paper": 0.9143,
+  "tol": 5e-05
+ },
+ "sw_T1_p": {
+  "paper": 0.118,
+  "tol": 0.0005
+ },
+ "sw_T2_W": {
+  "paper": 0.8862,
+  "tol": 5e-05
+ },
+ "sw_T2_p": {
+  "paper": 0.04,
+  "tol": 0.0005
+ },
+ "sw_T3_W": {
+  "paper": 0.9611,
+  "tol": 5e-05
+ },
+ "sw_T3_p": {
+  "paper": 0.624,
+  "tol": 0.0005
+ },
+ "sw_T4_W": {
+  "paper": 0.9315,
+  "tol": 5e-05
+ },
+ "sw_T4_p": {
+  "paper": 0.287,
+  "tol": 0.0005
+ },
+ "T1_mean": {
+  "paper": 76.76,
+  "tol": 0.005
+ },
+ "T1_sd": {
+  "paper": 15.98,
+  "tol": 0.005
+ },
+ "T1_min": {
+  "paper": 42.5,
+  "tol": 0
+ },
+ "T1_max": {
+  "paper": 97.5,
+  "tol": 0
+ },
+ "T1_q1": {
+  "paper": 72.5,
+  "tol": 0.005
+ },
+ "T1_median": {
+  "paper": 77.5,
+  "tol": 0.005
+ },
+ "T1_q3": {
+  "paper": 85.0,
+  "tol": 0.005
+ },
+ "T2_mean": {
+  "paper": 62.65,
+  "tol": 0.005
+ },
+ "T2_sd": {
+  "paper": 22.99,
+  "tol": 0.005
+ },
+ "T2_min": {
+  "paper": 17.5,
+  "tol": 0
+ },
+ "T2_max": {
+  "paper": 92.5,
+  "tol": 0
+ },
+ "T2_q1": {
+  "paper": 45.0,
+  "tol": 0.005
+ },
+ "T2_median": {
+  "paper": 72.5,
+  "tol": 0.005
+ },
+ "T2_q3": {
+  "paper": 77.5,
+  "tol": 0.005
+ },
+ "T3_mean": {
+  "paper": 73.89,
+  "tol": 0.005
+ },
+ "T3_sd": {
+  "paper": 12.9,
+  "tol": 0.005
+ },
+ "T3_min": {
+  "paper": 50.0,
+  "tol": 0
+ },
+ "T3_max": {
+  "paper": 95.0,
+  "tol": 0
+ },
+ "T3_q1": {
+  "paper": 65.0,
+  "tol": 0.005
+ },
+ "T3_median": {
+  "paper": 71.25,
+  "tol": 0.005
+ },
+ "T3_q3": {
+  "paper": 84.38,
+  "tol": 0.005
+ },
+ "T4_mean": {
+  "paper": 77.67,
+  "tol": 0.005
+ },
+ "T4_sd": {
+  "paper": 11.44,
+  "tol": 0.005
+ },
+ "T4_min": {
+  "paper": 55.0,
+  "tol": 0
+ },
+ "T4_max": {
+  "paper": 92.5,
+  "tol": 0
+ },
+ "T4_q1": {
+  "paper": 73.75,
+  "tol": 0.005
+ },
+ "T4_median": {
+  "paper": 77.5,
+  "tol": 0.005
+ },
+ "T4_q3": {
+  "paper": 85.0,
+  "tol": 0.005
+ },
+ "sw_single_W": {
+  "paper": 0.9321,
+  "tol": 5e-05
+ },
+ "sw_single_p": {
+  "paper": 0.04471,
+  "tol": 5e-06
+ },
+ "sw_multi_W": {
+  "paper": 0.9118,
+  "tol": 5e-05
+ },
+ "sw_multi_p": {
+  "paper": 0.00836,
+  "tol": 5e-06
+ },
+ "single_mean": {
+  "paper": 77.19,
+  "tol": 0.005
+ },
+ "single_median": {
+  "paper": 77.5,
+  "tol": 0.005
+ },
+ "multi_mean": {
+  "paper": 68.43,
+  "tol": 0.005
+ },
+ "multi_median": {
+  "paper": 72.5,
+  "tol": 0.005
+ },
+ "rq1_single_W": {
+  "paper": 434.0,
+  "tol": 0
+ },
+ "rq1_single_p": {
+  "paper": 0.00049,
+  "tol": 5e-06,
+  "where": "RQ1 Wilcoxon, exact method"
+ },
+ "rq1_multi_W": {
+  "paper": 369.0,
+  "tol": 0
+ },
+ "rq1_multi_p": {
+  "paper": 0.19273,
+  "tol": 5e-06
+ },
+ "rq1_mw_U": {
+  "paper": 718.5,
+  "tol": 0
+ },
+ "rq1_mw_p": {
+  "paper": 0.04673,
+  "tol": 5e-06
+ },
+ "tost_multi_lower_W": {
+  "paper": 445.0,
+  "tol": 0,
+  "where": "commented-out TOST table in main.tex"
+ },
+ "tost_multi_lower_p": {
+  "paper": 0.01636,
+  "tol": 5e-06
+ },
+ "tost_multi_upper_W": {
+  "paper": 263.0,
+  "tol": 0
+ },
+ "tost_multi_upper_p": {
+  "paper": 0.20179,
+  "tol": 5e-06
+ },
+ "rq2_single_U": {
+  "paper": 130.0,
+  "tol": 0
+ },
+ "rq2_single_p": {
+  "paper": 0.93955,
+  "tol": 5e-06
+ },
+ "rq2_multi_U": {
+  "paper": 119.5,
+  "tol": 0
+ },
+ "rq2_multi_p": {
+  "paper": 0.27507,
+  "tol": 5e-06
+ },
+ "cronbach_alpha": {
+  "paper": 0.78,
+  "tol": 0.005
+ },
+ "attrition_chi2_p": {
+  "paper": 0.24,
+  "tol": 0.005
+ },
+ "attrition_mw_p": {
+  "paper": 0.48,
+  "tol": 0.005
+ },
+ "sec_single_mean": {
+  "paper": 42.41,
+  "tol": 0.005
+ },
+ "sec_single_sd": {
+  "paper": 11.02,
+  "tol": 0.005
+ },
+ "sec_single_median": {
+  "paper": 42.5,
+  "tol": 0.005
+ },
+ "sec_multi_mean": {
+  "paper": 39.69,
+  "tol": 0.005,
+  "where": "RQ3; paper uses the stored P53 score, see alt_ keys",
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+ },
+ "sec_multi_sd": {
+  "paper": 14.66,
+  "tol": 0.005,
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+ },
+ "sec_multi_median": {
+  "paper": 41.25,
+  "tol": 0.005
+ },
+ "sec_sw_single_p": {
+  "paper": 0.33,
+  "tol": 0.005
+ },
+ "sec_sw_multi_p": {
+  "paper": 0.16,
+  "tol": 0.005,
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+ },
+ "sec_t_df": {
+  "paper": 56.8,
+  "tol": 0.05,
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+ },
+ "sec_t": {
+  "paper": 0.82,
+  "tol": 0.005,
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+ },
+ "sec_t_p": {
+  "paper": 0.42,
+  "tol": 0.005,
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+ },
+ "sec_mw_U": {
+  "paper": 487.5,
+  "tol": 0
+ },
+ "sec_mw_p": {
+  "paper": 0.56,
+  "tol": 0.005
+ },
+ "sec_diff": {
+  "paper": 2.72,
+  "tol": 0.005,
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+ },
+ "sec_ci_lo": {
+  "paper": -3.93,
+  "tol": 0.005,
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+ },
+ "sec_ci_hi": {
+  "paper": 9.38,
+  "tol": 0.005,
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+ },
+ "sec_hedges_g": {
+  "paper": 0.21,
+  "tol": 0.005,
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+ },
+ "sec_power_d": {
+  "paper": 0.73,
+  "tol": 0.01
+ },
+ "sec_bf01": {
+  "paper": 2.9,
+  "tol": 0.05,
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+ },
+ "alt_sec_multi_mean": {
+  "paper": 39.69,
+  "tol": 0.005
+ },
+ "alt_sec_multi_sd": {
+  "paper": 14.66,
+  "tol": 0.005
+ },
+ "alt_sec_t_df": {
+  "paper": 56.8,
+  "tol": 0.05
+ },
+ "alt_sec_t": {
+  "paper": 0.82,
+  "tol": 0.005
+ },
+ "alt_sec_t_p": {
+  "paper": 0.42,
+  "tol": 0.005
+ },
+ "alt_sec_mw_p": {
+  "paper": 0.56,
+  "tol": 0.005
+ },
+ "alt_sec_diff": {
+  "paper": 2.72,
+  "tol": 0.005
+ },
+ "alt_sec_ci_lo": {
+  "paper": -3.93,
+  "tol": 0.005
+ },
+ "alt_sec_ci_hi": {
+  "paper": 9.38,
+  "tol": 0.005
+ },
+ "alt_sec_hedges_g": {
+  "paper": 0.21,
+  "tol": 0.005
+ },
+ "alt_sec_bf01": {
+  "paper": 2.9,
+  "tol": 0.05
+ },
+ "rho_overall": {
+  "paper": 0.49,
+  "tol": 0.005
+ },
+ "rho_T1": {
+  "paper": 0.61,
+  "tol": 0.005
+ },
+ "rho_T1_p": {
+  "paper": 0.02,
+  "tol": 0.005
+ },
+ "rho_T2": {
+  "paper": 0.85,
+  "tol": 0.005
+ },
+ "rho_T3": {
+  "paper": 0.53,
+  "tol": 0.005
+ },
+ "rho_T3_p": {
+  "paper": 0.02,
+  "tol": 0.005
+ },
+ "rho_T4": {
+  "paper": -0.61,
+  "tol": 0.005
+ },
+ "rho_T4_p": {
+  "paper": 0.02,
+  "tol": 0.005
+ },
+ "alt_rho_overall": {
+  "paper": 0.49,
+  "tol": 0.005
+ },
+ "alt_rho_T2": {
+  "paper": 0.85,
+  "tol": 0.005
+ }
+}

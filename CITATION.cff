@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: "If you use this dataset or code, please cite both the article and this package."
+title: "Reproduction package: Measuring the impact of multi-signature self-custody on crypto-wallet usability and security perception"
+type: dataset
+license: CC-BY-4.0
+repository-code: "https://github.com/lifia-unlp/shared-custody-with-self-experiment-repro-pgk"
+# doi: 10.5281/zenodo.XXXXXXX   (to be added on deposit)
+authors:
+  - family-names: Gindre
+    given-names: Francisco
+    affiliation: "LIFIA, Facultad de Informática, Universidad Nacional de La Plata; CONICET"
+  - family-names: Riva
+    given-names: María Florencia
+    affiliation: "LIFIA, Facultad de Informática, Universidad Nacional de La Plata"
+  - family-names: Clavería
+    given-names: Mariano G.
+    affiliation: "Universidad Nacional de Quilmes"
+  - family-names: Urbieta
+    given-names: Matías
+    affiliation: "LIFIA, Facultad de Informática, Universidad Nacional de La Plata; CONICET; Universidad Nacional de Quilmes"
+  - family-names: Rossi
+    given-names: Gustavo
+    affiliation: "Universidad Abierta Interamericana"
+keywords:
+  - cryptocurrency
+  - self-custody
+  - multi-signature
+  - usability
+  - System Usability Scale
+  - reproduction package
+preferred-citation:
+  type: article
+  title: "Measuring the impact of multi-signature self-custody on crypto-wallet usability and security perception"
+  authors:
+    - family-names: Gindre
+      given-names: Francisco
+    - family-names: Riva
+      given-names: María Florencia
+    - family-names: Clavería
+      given-names: Mariano G.
+    - family-names: Urbieta
+      given-names: Matías
+    - family-names: Rossi
+      given-names: Gustavo
+  year: 2026
+  notes: "Under review."
