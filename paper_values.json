@@ -1,5 +1,5 @@
 {
- "_comment": "Values as printed in the manuscript (Results section, August 2026 revision). Keys match output/values.json. tol = absolute tolerance used by scripts/verify.py.",
+ "_comment": "Values as printed in the manuscript (Results section, Overleaf revision 155f753, 2026-08-26). Keys match output/values.json. tol = absolute tolerance used by scripts/verify.py.",
  "sw_p": {
   "paper": 0.00018478,
   "tol": 1e-07,
@@ -356,12 +356,14 @@
  },
  "sec_power_d": {
   "paper": 0.73,
-  "tol": 0.01
+  "tol": 0.01,
+  "where": "power/Bayes paragraph of RQ3, commented out in the manuscript since 2026-08-26"
  },
  "sec_bf01": {
   "paper": 2.9,
   "tol": 0.05,
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value",
+  "where": "power/Bayes paragraph of RQ3, commented out in the manuscript since 2026-08-26"
  },
  "alt_sec_multi_mean": {
   "paper": 39.69,
@@ -405,7 +407,8 @@
  },
  "alt_sec_bf01": {
   "paper": 2.9,
-  "tol": 0.05
+  "tol": 0.05,
+  "where": "power/Bayes paragraph of RQ3, commented out in the manuscript since 2026-08-26"
  },
  "rho_overall": {
   "paper": 0.49,

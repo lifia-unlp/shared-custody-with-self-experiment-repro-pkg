@@ -87,7 +87,7 @@
 | sec_ci_lo | -3.93 | -4.03663 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
 | sec_ci_hi | 9.38 | 9.01431 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
 | sec_hedges_g | 0.21 | 0.191821 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| sec_power_d | 0.73 | 0.73726 | yes |  |
+| sec_power_d | 0.73 | 0.73726 | yes | power/Bayes paragraph of RQ3, commented out in the manuscript since 2026-08-26 |
 | sec_bf01 | 2.9 | 2.97778 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
 | alt_sec_multi_mean | 39.69 | 39.6875 | yes |  |
 | alt_sec_multi_sd | 14.66 | 14.6567 | yes |  |
@@ -99,7 +99,7 @@
 | alt_sec_ci_lo | -3.93 | -3.93475 | yes |  |
 | alt_sec_ci_hi | 9.38 | 9.38118 | yes |  |
 | alt_sec_hedges_g | 0.21 | 0.205313 | yes |  |
-| alt_sec_bf01 | 2.9 | 2.87034 | yes |  |
+| alt_sec_bf01 | 2.9 | 2.87034 | yes | power/Bayes paragraph of RQ3, commented out in the manuscript since 2026-08-26 |
 | rho_overall | 0.49 | 0.486703 | yes |  |
 | rho_T1 | 0.61 | 0.606516 | yes |  |
 | rho_T1_p | 0.02 | 0.0214716 | yes |  |
