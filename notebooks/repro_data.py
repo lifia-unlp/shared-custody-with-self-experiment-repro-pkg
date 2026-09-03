@@ -13,12 +13,11 @@ the notebooks.
 Differences with respect to the original sheet (see data/CODEBOOK.md):
   - rows are in participant order P01..P67 (the sheet kept the form's export
     order, which swaps two rows; no statistic depends on row order);
-  - "seguridad sus" is recomputed from the six items as
-    sum(odd) - 3 - (sum(even) - 3) (raw, -12..12), and is NaN for the seven
-    participants who answered no security item (the sheet stored 0 for them,
-    which every notebook filters out anyway). For P53, who answered five of
-    six items, the missing item counts as neutral, giving -6 where the sheet
-    stored -9.
+  - "seguridad sus" is derived from security_score and is therefore NaN for
+    every participant with an incomplete security block: the seven who
+    answered no item (the sheet stored 0 for them) and P53, who answered
+    five of six (the sheet stored -9, obtained by summing the blank as 0).
+    The notebooks exclude all eight rows, matching the paper.
 """
 import os
 from pathlib import Path

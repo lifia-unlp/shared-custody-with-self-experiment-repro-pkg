@@ -25,18 +25,25 @@ Statistical procedures (scipy 1.17 / statsmodels 0.14 defaults unless noted):
                   Mann-Whitney U two-sided between single- and multi-signature
                   groups; TOST arms (Wilcoxon on SUS - 63 "greater" and
                   SUS - 73 "less") reported for reference.
+  RQ1 per treat.  post-hoc: one-sample t vs 68 (alternative="greater") with
+                  the one-sided 95% lower confidence bound, exact Wilcoxon,
+                  sign test (binomtest), and Holm correction over the two
+                  multi-signature treatments.
   RQ2             Mann-Whitney U two-sided, T1 vs T4 and T2 vs T3.
-  RQ3             security score = ((sum odd - 3) + (15 - sum even)) x 2.5;
-                  participants with no security answers excluded (n = 60);
-                  Cronbach's alpha on the six items (negatively worded items
-                  reverse-coded); attrition checks (chi-square treatment x
-                  answered, Mann-Whitney on SUS answered vs not); Shapiro per
+  RQ3             security score = ((sum odd - 3) + (15 - sum even)) x 2.5,
+                  defined only for complete six-item responses; participants
+                  with any missing security item excluded (7 blank + 1
+                  partial = 8, leaving n = 59); Cronbach's alpha on the six
+                  items (negatively worded items reverse-coded); attrition
+                  checks (Mann-Whitney on SUS answered vs not; chi-square
+                  treatment x answered with its minimum expected count;
+                  Fisher-Freeman-Halton exact test by treatment and by day,
+                  Monte Carlo with 20000 resamples, seed 0); Shapiro per
                   group; Welch t-test, Welch 95% CI, Hedges' g, Mann-Whitney;
-                  power for d at 80% (statsmodels TTestIndPower, two-sided,
-                  alpha .05); JZS Bayes factor BF01 (Rouder et al. 2009,
-                  scale r = sqrt(2)/2).
+                  TOST equivalence with margins of d = 0.3, 0.5, 0.8 pooled
+                  SDs (two one-sided Welch tests, p = max of the arms).
   Correlation     Spearman rho with two-sided p, overall and per treatment,
-                  on the n = 60 participants with a security score.
+                  on the n = 59 participants with a security score.
 """
 import json
 import os
@@ -44,7 +51,7 @@ import sys
 
 import numpy as np
 import pandas as pd
-from scipy import stats, integrate
+from scipy import stats
 
 import matplotlib
 matplotlib.use("Agg")
@@ -187,24 +194,45 @@ def welch(a, b):
     return res.statistic, res.df, res.pvalue, diff, ci
 
 
-def bf10_jzs(t, n1, n2, r=np.sqrt(2) / 2):
-    """JZS Bayes factor for a two-sample t-test (Rouder et al., 2009)."""
-    n = n1 * n2 / (n1 + n2)
-    nu = n1 + n2 - 2
-
-    def integrand(g):
-        return ((1 + n * g * r ** 2) ** -0.5
-                * (1 + t ** 2 / ((1 + n * g * r ** 2) * nu)) ** (-(nu + 1) / 2)
-                * (2 * np.pi) ** -0.5 * g ** -1.5 * np.exp(-1 / (2 * g)))
-    num, _ = integrate.quad(integrand, 0, np.inf)
-    den = (1 + t ** 2 / nu) ** (-(nu + 1) / 2)
-    return num / den
+def pooled_sd(a, b):
+    return np.sqrt(((len(a) - 1) * a.var(ddof=1) + (len(b) - 1) * b.var(ddof=1))
+                   / (len(a) + len(b) - 2))
 
 
-def power_d(n1, n2, power=0.8):
-    from statsmodels.stats.power import TTestIndPower
-    return TTestIndPower().solve_power(nobs1=n1, ratio=n2 / n1, alpha=0.05,
-                                       power=power, alternative="two-sided")
+def tost_welch(a, b, margin):
+    """TOST equivalence via two one-sided Welch tests; returns max arm p."""
+    se = np.sqrt(a.var(ddof=1) / len(a) + b.var(ddof=1) / len(b))
+    dof = stats.ttest_ind(a, b, equal_var=False).df
+    diff = a.mean() - b.mean()
+    p_lower = stats.t.sf((diff + margin) / se, dof)   # H1: diff > -margin
+    p_upper = stats.t.cdf((diff - margin) / se, dof)  # H1: diff < +margin
+    return max(p_lower, p_upper)
+
+
+def fisher_freeman_halton_mc(labels, groups, n_resamples=20000, seed=0):
+    """Monte Carlo Fisher-Freeman-Halton test on an RxC table, chi-square
+    statistic, permutation of group labels; seeded, so deterministic."""
+    labels = np.asarray(labels)
+    groups = np.asarray(groups)
+    obs = stats.chi2_contingency(pd.crosstab(groups, labels)).statistic
+    rng = np.random.default_rng(seed)
+    hits = 0
+    for _ in range(n_resamples):
+        perm = rng.permutation(labels)
+        s = stats.chi2_contingency(pd.crosstab(groups, perm)).statistic
+        hits += s >= obs - 1e-12
+    return (hits + 1) / (n_resamples + 1)
+
+
+def holm_adjust(pvals):
+    order = np.argsort(pvals)
+    m = len(pvals)
+    adj = np.empty(m)
+    running = 0.0
+    for rank, idx in enumerate(order):
+        running = max(running, (m - rank) * pvals[idx])
+        adj[idx] = min(1.0, running)
+    return adj
 
 
 def latex_table(path, header, rows, caption, label):
@@ -438,6 +466,35 @@ def main():
     boxplot([single, multi], ["Single-signature (T1+T4)", "Multi-signature (T2+T3)"],
             BENCHMARK, "SUS score", "SUS scores by signature scheme", "boxplot_RQ1", (0, 105))
 
+    R.h(3, "Post-hoc: each treatment against the benchmark")
+    R.add("One-sample t-test vs 68 (H1: mean > 68) with the one-sided 95% lower "
+          "confidence bound, exact Wilcoxon, and sign test. Holm correction is "
+          "applied over the two multi-signature treatments (T2, T3), matching "
+          "the caveat discussed in the paper.")
+    R.add()
+    rows, tp = [], {}
+    for t in (1, 2, 3, 4):
+        d = by_t[t]
+        res = stats.ttest_1samp(d, BENCHMARK, alternative="greater")
+        se = d.std(ddof=1) / np.sqrt(len(d))
+        lcb = d.mean() - stats.t.ppf(0.95, len(d) - 1) * se
+        wp = stats.wilcoxon(d - BENCHMARK, alternative="greater", method="exact").pvalue
+        pos = int((d > BENCHMARK).sum())
+        nz = int((d != BENCHMARK).sum())
+        sp_ = stats.binomtest(pos, nz, 0.5, alternative="greater").pvalue
+        tp[t] = res.pvalue
+        R.val(f"rq1_T{t}_t", res.statistic); R.val(f"rq1_T{t}_t_p", res.pvalue)
+        R.val(f"rq1_T{t}_lcb", lcb); R.val(f"rq1_T{t}_wilcoxon_p", wp)
+        R.val(f"rq1_T{t}_sign_p", sp_)
+        rows.append((SHORT[t], len(d), f(d.mean(), 2), f(res.statistic, 3),
+                     f(res.pvalue, 4), f(lcb, 2), f(wp, 4), f(sp_, 4)))
+    holm = holm_adjust([tp[2], tp[3]])
+    R.val("rq1_T2_holm_p", holm[0]); R.val("rq1_T3_holm_p", holm[1])
+    R.table(["Treatment", "N", "Mean", "t", "p (t, one-sided)", "95% LCB",
+             "p (Wilcoxon exact)", "p (sign)"], rows)
+    R.add(f"Holm-adjusted t-test p over T2/T3: T2 = {f(holm[0], 4)}, T3 = {f(holm[1], 4)}.")
+    R.add()
+
     # ------------------------------------------------------------- RQ2
     R.h(2, "RQ2: effect of the initiating device (Mann-Whitney U, two-sided)")
     rows = []
@@ -455,13 +512,16 @@ def main():
     # ------------------------------------------------------------- RQ3
     R.h(2, "RQ3: security perception")
     sec_cols = [f"security_q{i}" for i in range(1, 7)]
-    answered = df["security_items_answered"] > 0
-    R.add(f"Participants with at least one security answer: {int(answered.sum())} of {len(df)} "
-          f"({int((~answered).sum())} excluded). One participant "
-          f"({df.loc[df.security_items_answered == 5, 'participant_id'].item()}) "
-          "answered 5 of 6 items; the missing item is scored as neutral (see data/CODEBOOK.md).")
+    answered = df["security_items_answered"] == 6
+    n_blank = int((df.security_items_answered == 0).sum())
+    n_part = int(((df.security_items_answered > 0) & ~answered).sum())
+    R.add(f"Analysis set: complete six-item responses only, n = {int(answered.sum())} "
+          f"of {len(df)}. Excluded: {n_blank} participants who answered no item and "
+          f"{n_part} ({df.loc[(df.security_items_answered > 0) & ~answered, 'participant_id'].item()}) "
+          "who answered 5 of 6, per the exclusion rule stated in the paper "
+          "(see data/CODEBOOK.md and the sensitivity block below).")
     R.add()
-    items = df.loc[df.security_items_answered == 6, sec_cols].to_numpy(float)
+    items = df.loc[answered, sec_cols].to_numpy(float)
     items[:, 1::2] = 6 - items[:, 1::2]
     alpha = cronbach_alpha(items)
     R.val("cronbach_alpha", alpha)
@@ -470,13 +530,25 @@ def main():
     R.add()
     ct = pd.crosstab(df.treatment, answered)
     chi = stats.chi2_contingency(ct)
+    min_expected = chi.expected_freq.min()
     R.val("attrition_chi2_p", chi.pvalue)
     mw = stats.mannwhitneyu(sus[answered.to_numpy()], sus[~answered.to_numpy()], alternative="two-sided")
     R.val("attrition_mw_p", mw.pvalue)
-    R.add(f"Attrition checks: chi-square treatment x answered, chi2 = {f(chi.statistic, 3)}, "
-          f"df = {chi.dof}, p = {f(chi.pvalue, 3)}; Mann-Whitney SUS answered vs not, "
-          f"U = {f(mw.statistic, 1)}, p = {f(mw.pvalue, 3)}. Non-responders per treatment: "
-          + ", ".join(f"{SHORT[t]}={int(v)}" for t, v in ct[False].items()))
+    ffh_t = fisher_freeman_halton_mc(answered.to_numpy(), df.treatment.to_numpy())
+    ffh_d = fisher_freeman_halton_mc(answered.to_numpy(), df.day.to_numpy())
+    R.val("attrition_ffh_treatment_p", ffh_t)
+    R.val("attrition_ffh_day_p", ffh_d)
+    R.add(f"Attrition checks: Mann-Whitney SUS answered vs not, U = {f(mw.statistic, 1)}, "
+          f"p = {f(mw.pvalue, 3)}. Chi-square treatment x answered, chi2 = {f(chi.statistic, 3)}, "
+          f"df = {chi.dof}, p = {f(chi.pvalue, 3)}, but its minimum expected count is "
+          f"{f(min_expected, 2)}, so the approximation is not valid; the "
+          f"Fisher-Freeman-Halton exact test (Monte Carlo, 20000 resamples, seed 0) gives "
+          f"p = {f(ffh_t, 3)} by treatment and p = {f(ffh_d, 3)} by experiment day. "
+          "Excluded participants per treatment: "
+          + ", ".join(f"{SHORT[t]}={int(v)}" for t, v in ct[False].items())
+          + "; per day: "
+          + ", ".join(f"day {d}={int(v)}" for d, v in
+                      pd.crosstab(df.day, answered)[False].items()))
     R.add()
 
     sdf = df[answered].copy()
@@ -508,61 +580,47 @@ def main():
     R.val("sec_hedges_g", g_)
     mw = stats.mannwhitneyu(sec_single, sec_multi, alternative="two-sided")
     R.val("sec_mw_U", mw.statistic); R.val("sec_mw_p", mw.pvalue)
-    dpow = power_d(len(sec_single), len(sec_multi))
-    R.val("sec_power_d", dpow)
-    sp = np.sqrt(((len(sec_single) - 1) * sec_single.var(ddof=1) + (len(sec_multi) - 1) * sec_multi.var(ddof=1))
-                 / (len(sec_single) + len(sec_multi) - 2))
-    bf10 = bf10_jzs(t, len(sec_single), len(sec_multi))
-    R.val("sec_bf01", 1 / bf10)
+    sp = pooled_sd(sec_single, sec_multi)
+    tost_rows = []
+    for dd in (0.3, 0.5, 0.8):
+        pv = tost_welch(sec_single, sec_multi, dd * sp)
+        R.val(f"sec_tost_d{int(dd*10):02d}_p", pv)
+        tost_rows.append((f"d = {dd:g} (+/- {dd * sp:.2f} points)", f(pv, 4)))
     R.table(["Statistic", "Value"], [
         ("Shapiro-Wilk p, single / multi", f"{f(sw1.pvalue, 3)} / {f(sw2.pvalue, 3)}"),
-        ("Welch t", f"t({f(dof, 1)}) = {f(t, 3)}, p = {f(p, 3)}"),
+        ("Welch t", f"t({f(dof, 2)}) = {f(t, 3)}, p = {f(p, 5)}"),
         ("Mean difference (single - multi)", f"{f(diff, 2)}, 95% CI [{f(ci[0], 2)}, {f(ci[1], 2)}]"),
         ("Hedges' g (Cohen's d)", f"{f(g_, 3)} ({f(d_, 3)})"),
-        ("Mann-Whitney U", f"U = {f(mw.statistic, 1)}, p = {f(mw.pvalue, 3)}"),
-        ("Smallest d detectable at 80% power", f"{f(dpow, 3)} (about {f(dpow * sp, 1)} points)"),
-        ("JZS Bayes factor BF01 (r = 0.707)", f(1 / bf10, 2)),
+        ("Mann-Whitney U", f"U = {f(mw.statistic, 1)}, p = {f(mw.pvalue, 5)}"),
     ])
+    R.add("TOST equivalence (two one-sided Welch tests, margin expressed as a "
+          "multiple of the pooled SD; equivalence requires p < 0.05):")
+    R.add()
+    R.table(["Margin", "p (max of both arms)"], tost_rows)
 
-    # sensitivity: P53 scored as in the co-authors' spreadsheet (stored -9 raw, 7.5)
-    R.h(3, "Sensitivity: P53 scored as in the co-authors' spreadsheet")
-    R.add("The spreadsheet used for the paper stores a raw security score of -9 "
-          "(7.5 on the 0-60 scale) for P53 instead of the -6 (15.0) obtained from "
-          "the five answered items. Recomputing RQ3 with the stored value:")
+    # sensitivity: the two n = 60 scoring variants that circulated earlier
+    R.h(3, "Sensitivity: alternative treatments of the partial responder P53")
+    R.add("P53 answered five of six items. The analysis above drops the "
+          "participant (the paper's rule). Two other rules appeared in earlier "
+          "versions of the analysis: the co-authors' spreadsheet scored the "
+          "blank as 0 (score 7.5), and an earlier version of this package "
+          "scored it as neutral (score 15.0). Neither changes any conclusion:")
     R.add()
-    alt = sdf["security_score"].to_numpy(float).copy()
-    alt[(sdf.participant_id == "P53").to_numpy()] = 7.5
-    am = alt[sdf.treatment.isin(MULTI).to_numpy()]
-    a_s = alt[sdf.treatment.isin(SINGLE).to_numpy()]
-    t2, dof2, p2, diff2, ci2 = welch(a_s, am)
-    g2, _ = hedges_g(a_s, am)
-    mw2 = stats.mannwhitneyu(a_s, am, alternative="two-sided")
-    R.val("alt_sec_multi_mean", am.mean()); R.val("alt_sec_multi_sd", am.std(ddof=1))
-    R.val("alt_sec_t", t2); R.val("alt_sec_t_df", dof2); R.val("alt_sec_t_p", p2)
-    R.val("alt_sec_diff", diff2); R.val("alt_sec_ci_lo", ci2[0]); R.val("alt_sec_ci_hi", ci2[1])
-    R.val("alt_sec_hedges_g", g2); R.val("alt_sec_mw_p", mw2.pvalue)
-    R.val("alt_sec_bf01", 1 / bf10_jzs(t2, len(a_s), len(am)))
-    R.val("alt_sec_T2_mean", am[sdf.loc[sdf.treatment.isin(MULTI), "treatment"].to_numpy() == 2].mean())
-    R.val("alt_sec_T2_min", am.min())
-    R.table(["Statistic", "Value"], [
-        ("Multi-signature mean (SD)", f"{f(am.mean(), 2)} ({f(am.std(ddof=1), 2)})"),
-        ("Welch t", f"t({f(dof2, 1)}) = {f(t2, 3)}, p = {f(p2, 3)}"),
-        ("Mean difference", f"{f(diff2, 2)}, 95% CI [{f(ci2[0], 2)}, {f(ci2[1], 2)}]"),
-        ("Hedges' g", f(g2, 3)), ("Mann-Whitney p", f(mw2.pvalue, 3)),
-        ("BF01", f(R.values["alt_sec_bf01"], 2)),
-    ])
     alt_rows = []
-    for t in (1, 2, 3, 4):
-        m = (sdf.treatment == t).to_numpy()
-        rho, p = stats.spearmanr(sdf.loc[m, "sus_score"], alt[m])
-        R.val(f"alt_rho_T{t}", rho)
-        alt_rows.append((SHORT[t], f(rho, 3), f(p, 5)))
-    rho, p = stats.spearmanr(sdf["sus_score"], alt)
-    R.val("alt_rho_overall", rho)
-    alt_rows.append(("Overall", f(rho, 3), f(p, 5)))
-    R.add("Spearman correlations with the stored value:")
-    R.add()
-    R.table(["Group", "rho", "p-value"], alt_rows)
+    keep = sdf["security_score"].to_numpy(float)
+    keep_t = sdf["treatment"].to_numpy()
+    p53 = df[df.participant_id == "P53"].iloc[0]
+    for label, key, val in (("blank as 0 (spreadsheet)", "alt_stored", 7.5),
+                            ("blank as neutral (score 15.0)", "alt_neutral", 15.0)):
+        av = np.append(keep, val)
+        at = np.append(keep_t, p53.treatment)
+        a_s = av[np.isin(at, SINGLE)]
+        am = av[np.isin(at, MULTI)]
+        t2, dof2, p2, diff2, ci2 = welch(a_s, am)
+        R.val(f"{key}_multi_mean", am.mean()); R.val(f"{key}_t_p", p2)
+        alt_rows.append((label, len(av), f(am.mean(), 2), f(am.std(ddof=1), 2),
+                         f"t({f(dof2, 1)}) = {f(t2, 2)}", f(p2, 3)))
+    R.table(["Rule", "n", "Multi mean", "Multi SD", "Welch t", "p"], alt_rows)
 
     # ------------------------------------------------------ correlations
     R.h(2, "Correlation between SUS and perceived security (Spearman)")

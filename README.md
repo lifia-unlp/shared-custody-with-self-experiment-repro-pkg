@@ -84,23 +84,30 @@ The notebooks write their own tables and figures to `output/notebooks/`.
    signature scheme; one-sample Wilcoxon signed-rank test of each scheme
    against 68 (H1: median > 68); Mann-Whitney U between schemes; both arms of
    a TOST equivalence test with a +/- 5 margin, for reference; box plot by
-   scheme (`figures/boxplot_RQ1.pdf`).
+   scheme (`figures/boxplot_RQ1.pdf`); post-hoc per-treatment tests against
+   the benchmark (one-sample t with the one-sided 95% lower confidence bound,
+   exact Wilcoxon, sign test, Holm correction over the two multi-signature
+   treatments).
 4. **RQ2, effect of the initiating device.** Mann-Whitney U, T1 vs T4 and T2
    vs T3.
-5. **RQ3, security perception.** Security score per participant; exclusion of
-   participants with no security answers (n = 60); Cronbach's alpha; attrition
-   checks; descriptives per treatment and per scheme; Shapiro-Wilk, Welch's t
-   with 95% CI, Hedges' g, Mann-Whitney U, smallest effect detectable at 80%
-   power, and the JZS Bayes factor BF01; box plot
-   (`figures/boxplot_security.pdf`). A sensitivity block recomputes RQ3 with
-   the security score that the co-authors' spreadsheet stored for participant
-   P53 (see Known data notes).
+5. **RQ3, security perception.** Security score per participant, defined only
+   for complete six-item responses; exclusion of the seven participants with
+   no security answers and of the one partial responder (n = 59, see Known
+   data notes); Cronbach's alpha; attrition checks (Mann-Whitney on SUS,
+   chi-square with its minimum expected count, and the Fisher-Freeman-Halton
+   exact test by treatment and by experiment day); descriptives per treatment
+   and per scheme; Shapiro-Wilk, Welch's t with 95% CI, Hedges' g,
+   Mann-Whitney U; TOST equivalence at margins of 0.3, 0.5, and 0.8 pooled
+   SDs; box plot (`figures/boxplot_security.pdf`). A sensitivity block
+   recomputes RQ3 under the two other P53 rules that circulated earlier.
 6. **Correlation analysis.** Spearman's rho between SUS and security scores,
-   overall and per treatment, with scatter plots (`figures/spearman_*.pdf`).
+   overall and per treatment (n = 59), with scatter plots
+   (`figures/spearman_*.pdf`).
 
-`output/verification.md` lists 108 values from the manuscript next to the
-reproduced value. All reproduce within the printed precision, except the RQ3
-values affected by the P53 score, which are reported both ways.
+`output/verification.md` lists 104 values from the manuscript next to the
+reproduced value. All reproduce within the printed precision except one
+documented misprint (the treatment 2 correlation, computed 0.817, printed as
+0.81 in the Results section while the Discussion says 0.82).
 
 ## Statistical procedures, exactly as run
 
@@ -115,11 +122,11 @@ All tests use `scipy.stats` (version pinned in `uv.lock`).
 | RQ1 between schemes | `mannwhitneyu(single, multi, alternative="two-sided")` |
 | TOST arms | `wilcoxon(x - 63, alternative="greater", method="exact")`, `wilcoxon(x - 73, alternative="less", method="exact")` |
 | RQ2 | `mannwhitneyu(a, b, alternative="two-sided")` |
+| RQ1 per treatment | `ttest_1samp(x, 68, alternative="greater")` with the one-sided 95% lower confidence bound; exact Wilcoxon; sign test via `binomtest`; Holm over T2/T3 |
 | RQ3 | `ttest_ind(a, b, equal_var=False)`; Welch-Satterthwaite CI; Hedges' g with the small-sample correction; `mannwhitneyu(a, b, alternative="two-sided")` |
-| Power | `statsmodels.stats.power.TTestIndPower().solve_power(nobs1=28, ratio=32/28, alpha=0.05, power=0.8)` |
-| Bayes factor | JZS two-sample BF (Rouder et al., 2009), Cauchy scale r = sqrt(2)/2, numerical integration |
+| RQ3 equivalence | TOST via two one-sided Welch tests, margins of 0.3 / 0.5 / 0.8 pooled SDs, p = max of the two arms |
 | Cronbach's alpha | standard formula on the six items after reverse-coding the even (negatively worded) items, complete cases only |
-| Attrition | `chi2_contingency(treatment x answered)`, `mannwhitneyu(SUS answered, SUS not answered)` |
+| Attrition | `mannwhitneyu(SUS answered, SUS not answered)`; `chi2_contingency(treatment x answered)` reported with its minimum expected count; Fisher-Freeman-Halton exact test (Monte Carlo permutation of the chi-square statistic, 20000 resamples, seed 0) by treatment and by day |
 | Correlation | `spearmanr(sus, security)` |
 
 Two choices deserve a note:
@@ -153,17 +160,20 @@ the comments can request them from the corresponding author.
 
 ## Known data notes
 
-- **P53 (treatment 2) answered five of the six security items.** The public
-  CSV scores the missing item as neutral (contributing 0), which yields a
-  security score of 15.0. The spreadsheet the co-authors used for the
-  manuscript stored 7.5 for this participant. `output/report.md` reports RQ3
-  both ways (the manuscript's figures correspond to the stored value); the
-  difference does not change any conclusion (Welch p = 0.448 vs 0.416,
-  Hedges' g = 0.19 vs 0.21, BF01 = 2.98 vs 2.87). The column
+- **P53 (treatment 2) answered five of the six security items.** Following
+  the exclusion rule stated in the paper, the participant is excluded from
+  RQ3 and the correlation analysis, and `security_score` is empty in the CSV
+  (it is defined only for complete six-item responses). Two other rules
+  circulated in earlier versions of the analysis (the co-authors' spreadsheet
+  summed the blank as 0, giving 7.5; an earlier version of this package
+  scored it as neutral, giving 15.0); `output/report.md` includes a
+  sensitivity block showing that neither changes any conclusion. The column
   `security_items_answered` lets analysts apply another rule.
-- **Seven participants answered no security item** and are excluded from RQ3
-  and from the correlation analysis (n = 60). Their `security_score` is empty
-  in the CSV.
+- **Seven participants answered no security item.** Together with P53 this
+  leaves n = 59 for RQ3 and the correlation analysis. The exclusions are
+  unrelated to SUS score and treatment but concentrate in the first
+  experiment day (Fisher-Freeman-Halton p = 0.010), which the paper notes as
+  a threat.
 - **Row order.** The co-authors' spreadsheet keeps the form's export order,
   in which two submissions of 7 November appear out of chronological order;
   the CSV is in chronological order, so P25 and P26 are swapped relative to
@@ -172,7 +182,8 @@ the comments can request them from the corresponding author.
 ## Notebooks
 
 `notebooks/` contains the six analysis notebooks written by the co-authors
-(originally run on Windows with Python 3.11 against the private spreadsheet).
+(originally run on Windows with Python 3.11 against the private spreadsheet,
+September 2026 revision).
 The only edits are: a first cell that imports `repro_data.py`, which rebuilds
 the spreadsheet's `Datos cuanti` sheet from the public CSV with the original
 Spanish column names and redirects file output to `output/notebooks/`; the
@@ -186,8 +197,13 @@ calls (see above). Comments and printed labels remain in Spanish.
 | `histograms_and_items.ipynb` | SUS histogram, per-item bar plot |
 | `rq1_sus_benchmark.ipynb` | RQ1 descriptives, Wilcoxon, Mann-Whitney, box plots |
 | `rq2_initiating_device.ipynb` | RQ2 Mann-Whitney |
-| `rq3_security_perception.ipynb` | RQ3 descriptives and box plot |
+| `security_perception.ipynb` | RQ3 tests: alpha, Welch, Mann-Whitney, TOST, attrition |
+| `security_boxplot.ipynb` | RQ3 descriptives and box plot |
 | `correlation_spearman.ipynb` | Spearman correlations and scatter plots |
+
+The paper repository also contains `reproduction/v2.1/`, a scripted rework of
+the notebooks by one of the co-authors; its numbers agree with this package
+for every value the manuscript reports.
 
 ## Citation and license
 

@@ -121,6 +121,20 @@ For reference, TOST arms for the multi-signature group with margin +/- 5 (Wilcox
 
 Equivalence within the margin requires BOTH arms to be significant; non-inferiority requires only the first.
 
+### Post-hoc: each treatment against the benchmark
+
+One-sample t-test vs 68 (H1: mean > 68) with the one-sided 95% lower confidence bound, exact Wilcoxon, and sign test. Holm correction is applied over the two multi-signature treatments (T2, T3), matching the caveat discussed in the paper.
+
+| Treatment | N | Mean | t | p (t, one-sided) | 95% LCB | p (Wilcoxon exact) | p (sign) |
+|---|---|---|---|---|---|---|---|
+| T1 | 17 | 76.76 | 2.262 | 0.0190 | 70.00 | 0.0198 | 0.0245 |
+| T2 | 17 | 62.65 | -0.960 | 0.8243 | 52.91 | 0.6090 | 0.3145 |
+| T3 | 18 | 73.89 | 1.937 | 0.0348 | 68.60 | 0.0649 | 0.4073 |
+| T4 | 15 | 77.67 | 3.274 | 0.0028 | 72.47 | 0.0042 | 0.0176 |
+
+Holm-adjusted t-test p over T2/T3: T2 = 0.8243, T3 = 0.0695.
+
+
 ## RQ2: effect of the initiating device (Mann-Whitney U, two-sided)
 
 | Comparison | N1 | N2 | U | p-value (two-sided) |
@@ -131,63 +145,55 @@ Equivalence within the margin requires BOTH arms to be significant; non-inferior
 
 ## RQ3: security perception
 
-Participants with at least one security answer: 60 of 67 (7 excluded). One participant (P53) answered 5 of 6 items; the missing item is scored as neutral (see data/CODEBOOK.md).
+Analysis set: complete six-item responses only, n = 59 of 67. Excluded: 7 participants who answered no item and 1 (P53) who answered 5 of 6, per the exclusion rule stated in the paper (see data/CODEBOOK.md and the sensitivity block below).
 
 Cronbach's alpha (six items, negatively worded items reverse-coded, complete cases n = 59): 0.780
 
-Attrition checks: chi-square treatment x answered, chi2 = 4.213, df = 3, p = 0.239; Mann-Whitney SUS answered vs not, U = 175.0, p = 0.478. Non-responders per treatment: T1=3, T2=3, T3=0, T4=1
+Attrition checks: Mann-Whitney SUS answered vs not, U = 234.0, p = 0.977. Chi-square treatment x answered, chi2 = 5.535, df = 3, p = 0.137, but its minimum expected count is 1.79, so the approximation is not valid; the Fisher-Freeman-Halton exact test (Monte Carlo, 20000 resamples, seed 0) gives p = 0.137 by treatment and p = 0.010 by experiment day. Excluded participants per treatment: T1=3, T2=4, T3=0, T4=1; per day: day 1=6, day 2=1, day 3=1
 
 | Group | N | Mean | Median | SD | Min | Max |
 |---|---|---|---|---|---|---|
 | T1 | 14 | 38.57 | 36.25 | 12.85 | 17.5 | 60.0 |
-| T2 | 14 | 35.89 | 37.50 | 12.88 | 10.0 | 60.0 |
+| T2 | 13 | 37.50 | 37.50 | 11.86 | 10.0 | 60.0 |
 | T3 | 18 | 43.06 | 43.75 | 14.69 | 15.0 | 60.0 |
 | T4 | 14 | 46.25 | 45.00 | 7.45 | 32.5 | 57.5 |
 | T1+T4 (single) | 28 | 42.41 | 42.50 | 11.02 | 17.5 | 60.0 |
-| T2+T3 (multi) | 32 | 39.92 | 41.25 | 14.18 | 10.0 | 60.0 |
+| T2+T3 (multi) | 31 | 40.73 | 42.50 | 13.65 | 10.0 | 60.0 |
 
 | Statistic | Value |
 |---|---|
-| Shapiro-Wilk p, single / multi | 0.330 / 0.188 |
-| Welch t | t(57.3) = 0.764, p = 0.448 |
-| Mean difference (single - multi) | 2.49, 95% CI [-4.04, 9.01] |
-| Hedges' g (Cohen's d) | 0.192 (0.194) |
-| Mann-Whitney U | U = 487.5, p = 0.562 |
-| Smallest d detectable at 80% power | 0.737 (about 9.4 points) |
-| JZS Bayes factor BF01 (r = 0.707) | 2.98 |
+| Shapiro-Wilk p, single / multi | 0.330 / 0.232 |
+| Welch t | t(56.33) = 0.524, p = 0.60253 |
+| Mean difference (single - multi) | 1.68, 95% CI [-4.76, 8.13] |
+| Hedges' g (Cohen's d) | 0.133 (0.135) |
+| Mann-Whitney U | U = 459.5, p = 0.70323 |
 
+TOST equivalence (two one-sided Welch tests, margin expressed as a multiple of the pooled SD; equivalence requires p < 0.05):
 
-### Sensitivity: P53 scored as in the co-authors' spreadsheet
-
-The spreadsheet used for the paper stores a raw security score of -9 (7.5 on the 0-60 scale) for P53 instead of the -6 (15.0) obtained from the five answered items. Recomputing RQ3 with the stored value:
-
-| Statistic | Value |
+| Margin | p (max of both arms) |
 |---|---|
-| Multi-signature mean (SD) | 39.69 (14.66) |
-| Welch t | t(56.8) = 0.819, p = 0.416 |
-| Mean difference | 2.72, 95% CI [-3.93, 9.38] |
-| Hedges' g | 0.205 |
-| Mann-Whitney p | 0.562 |
-| BF01 | 2.87 |
+| d = 0.3 (+/- 3.74 points) | 0.2625 |
+| d = 0.5 (+/- 6.24 points) | 0.0813 |
+| d = 0.8 (+/- 9.98 points) | 0.0063 |
 
-Spearman correlations with the stored value:
 
-| Group | rho | p-value |
-|---|---|---|
-| T1 | 0.607 | 0.02147 |
-| T2 | 0.854 | 0.00010 |
-| T3 | 0.535 | 0.02219 |
-| T4 | -0.608 | 0.02118 |
-| Overall | 0.487 | 0.00008 |
+### Sensitivity: alternative treatments of the partial responder P53
+
+P53 answered five of six items. The analysis above drops the participant (the paper's rule). Two other rules appeared in earlier versions of the analysis: the co-authors' spreadsheet scored the blank as 0 (score 7.5), and an earlier version of this package scored it as neutral (score 15.0). Neither changes any conclusion:
+
+| Rule | n | Multi mean | Multi SD | Welch t | p |
+|---|---|---|---|---|---|
+| blank as 0 (spreadsheet) | 60 | 39.69 | 14.66 | t(56.8) = 0.82 | 0.416 |
+| blank as neutral (score 15.0) | 60 | 39.92 | 14.18 | t(57.3) = 0.76 | 0.448 |
 
 
 ## Correlation between SUS and perceived security (Spearman)
 
 | Group | n | rho | p-value |
 |---|---|---|---|
-| Overall | 60 | 0.487 | 0.00008 |
+| Overall | 59 | 0.460 | 0.00024 |
 | T1 | 14 | 0.607 | 0.02147 |
-| T2 | 14 | 0.850 | 0.00012 |
+| T2 | 13 | 0.817 | 0.00065 |
 | T3 | 18 | 0.535 | 0.02219 |
 | T4 | 14 | -0.608 | 0.02118 |
 

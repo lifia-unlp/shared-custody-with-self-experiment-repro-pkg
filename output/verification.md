@@ -68,47 +68,43 @@
 | rq2_multi_U | 119.5 | 119.5 | yes |  |
 | rq2_multi_p | 0.27507 | 0.275072 | yes |  |
 | cronbach_alpha | 0.78 | 0.779623 | yes |  |
-| attrition_chi2_p | 0.24 | 0.239395 | yes |  |
-| attrition_mw_p | 0.48 | 0.478244 | yes |  |
+| attrition_chi2_p | 0.14 | 0.136533 | yes |  |
+| attrition_mw_p | 0.97 | 0.976798 | yes |  |
 | sec_single_mean | 42.41 | 42.4107 | yes |  |
 | sec_single_sd | 11.02 | 11.0236 | yes |  |
 | sec_single_median | 42.5 | 42.5 | yes |  |
-| sec_multi_mean | 39.69 | 39.9219 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| sec_multi_sd | 14.66 | 14.1775 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| sec_multi_median | 41.25 | 41.25 | yes |  |
+| sec_multi_mean | 40.73 | 40.7258 | yes |  |
+| sec_multi_sd | 13.65 | 13.6503 | yes |  |
+| sec_multi_median | 42.5 | 42.5 | yes |  |
 | sec_sw_single_p | 0.33 | 0.329877 | yes |  |
-| sec_sw_multi_p | 0.16 | 0.187723 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| sec_t_df | 56.8 | 57.2548 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| sec_t | 0.82 | 0.763674 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| sec_t_p | 0.42 | 0.448197 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| sec_mw_U | 487.5 | 487.5 | yes |  |
-| sec_mw_p | 0.56 | 0.561903 | yes |  |
-| sec_diff | 2.72 | 2.48884 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| sec_ci_lo | -3.93 | -4.03663 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| sec_ci_hi | 9.38 | 9.01431 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| sec_hedges_g | 0.21 | 0.191821 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| sec_power_d | 0.73 | 0.73726 | yes | power/Bayes paragraph of RQ3, commented out in the manuscript since 2026-08-26 |
-| sec_bf01 | 2.9 | 2.97778 | differs (documented) | P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value |
-| alt_sec_multi_mean | 39.69 | 39.6875 | yes |  |
-| alt_sec_multi_sd | 14.66 | 14.6567 | yes |  |
-| alt_sec_t_df | 56.8 | 56.7881 | yes |  |
-| alt_sec_t | 0.82 | 0.819107 | yes |  |
-| alt_sec_t_p | 0.42 | 0.41615 | yes |  |
-| alt_sec_mw_p | 0.56 | 0.561908 | yes |  |
-| alt_sec_diff | 2.72 | 2.72321 | yes |  |
-| alt_sec_ci_lo | -3.93 | -3.93475 | yes |  |
-| alt_sec_ci_hi | 9.38 | 9.38118 | yes |  |
-| alt_sec_hedges_g | 0.21 | 0.205313 | yes |  |
-| alt_sec_bf01 | 2.9 | 2.87034 | yes | power/Bayes paragraph of RQ3, commented out in the manuscript since 2026-08-26 |
-| rho_overall | 0.49 | 0.486703 | yes |  |
+| sec_sw_multi_p | 0.23 | 0.231529 | yes |  |
+| sec_t_df | 56.3 | 56.3316 | yes |  |
+| sec_t | 0.52 | 0.523712 | yes |  |
+| sec_t_p | 0.6 | 0.602533 | yes |  |
+| sec_mw_U | 459.5 | 459.5 | yes |  |
+| sec_mw_p | 0.7 | 0.703235 | yes |  |
+| sec_diff | 1.68 | 1.68491 | yes |  |
+| sec_ci_lo | -4.76 | -4.75917 | yes |  |
+| sec_ci_hi | 8.13 | 8.12898 | yes |  |
+| sec_hedges_g | 0.13 | 0.133276 | yes |  |
+| rho_overall | 0.46 | 0.460467 | yes |  |
 | rho_T1 | 0.61 | 0.606516 | yes |  |
 | rho_T1_p | 0.02 | 0.0214716 | yes |  |
-| rho_T2 | 0.85 | 0.849838 | yes |  |
+| rho_T2 | 0.81 | 0.817301 | differs (documented) | manuscript misprint: computed rho = 0.817, which rounds to 0.82 (the Discussion says 0.82); Results prints 0.81 |
 | rho_T3 | 0.53 | 0.534867 | yes |  |
 | rho_T3_p | 0.02 | 0.0221912 | yes |  |
 | rho_T4 | -0.61 | -0.607581 | yes |  |
 | rho_T4_p | 0.02 | 0.021182 | yes |  |
-| alt_rho_overall | 0.49 | 0.487172 | yes |  |
-| alt_rho_T2 | 0.85 | 0.854287 | yes |  |
+| sec_tost_d05_p | 0.081 | 0.0812731 | yes |  |
+| sec_tost_d08_p | 0.006 | 0.00628344 | yes |  |
+| attrition_ffh_treatment_p | 0.13 | 0.137493 | yes | Fisher-Freeman-Halton exact by treatment; Monte Carlo, seed 0 |
+| rq1_T3_t | 1.94 | 1.93719 | yes |  |
+| rq1_T3_t_p | 0.035 | 0.0347605 | yes |  |
+| rq1_T3_lcb | 68.6 | 68.6006 | yes |  |
+| rq1_T2_wilcoxon_p | 0.609 | 0.609047 | yes |  |
+| rq1_T3_wilcoxon_p | 0.065 | 0.0648689 | yes | commented caveat in RQ1 |
+| rq1_T3_sign_p | 0.407 | 0.407265 | yes | commented caveat in RQ1 |
+| rq1_T3_holm_p | 0.07 | 0.069521 | yes | commented caveat in RQ1 |
+| rho_T2_p | 0.001 | 0.000645604 | yes | printed as p < 0.001 |
 
-97 of 108 values match; 11 differ for a documented reason (see notes); 0 differ unexpectedly.
+103 of 104 values match; 1 differ for a documented reason (see notes); 0 differ unexpectedly.

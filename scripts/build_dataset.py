@@ -17,10 +17,10 @@ Transformations applied:
     parsed to integers 1..5 WITHOUT any capping
   - SUS score computed as (sum(odd-1) + sum(5-even)) * 2.5   (0..100)
   - security score computed as ((sum(odd)-3) + (15-sum(even))) * 2.5  (0..60).
-    Participants who answered none of the six security items get an empty
-    score. A participant who skipped some but not all items (one case, P?? in
-    treatment 2) has each missing item scored as neutral (3), which contributes
-    0 to the sum; the number of answered items is recorded in
+    The score is computed only for participants who answered all six items;
+    otherwise it is left empty. One participant (P53, treatment 2) answered
+    five of the six items and therefore has no score, matching the exclusion
+    rule stated in the paper; the number of answered items is recorded in
     security_items_answered so analysts can apply a different rule.
   - free-text comment column dropped for privacy (available on request)
 
@@ -94,8 +94,7 @@ def sus_score(items):
 
 
 def security_score(items):
-    """Score 0..60. Missing items are scored as neutral (3)."""
-    items = [3 if v == "" else v for v in items]
+    """Score 0..60, only defined for a complete six-item response."""
     return round(((sum(items[0::2]) - 3) + (15 - sum(items[1::2]))) * 2.5, 1)
 
 
@@ -128,7 +127,7 @@ def build(raw):
             + [MAP_FREQ[r[16]], MAP_FREQ[r[17]], r[18]]
             + sus + [sus_score(sus) if all(v != "" for v in sus) else ""]
             + sec + [sum(v != "" for v in sec),
-                     security_score(sec) if any(v != "" for v in sec) else "",
+                     security_score(sec) if all(v != "" for v in sec) else "",
                      norm_devices(r[35])])
 
     with open(OUT, "w", newline="", encoding="utf-8") as f:

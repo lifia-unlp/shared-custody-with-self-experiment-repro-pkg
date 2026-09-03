@@ -35,7 +35,7 @@ answered".
 | `sus_score` | SUS score 0 to 100: (sum(odd - 1) + sum(5 - even)) x 2.5 |
 | `security_q1` to `security_q6` | Security-perception item responses, Likert 1 to 5. Odd items positively worded, even items negatively worded. Statements in the paper's appendix. Empty = not answered. |
 | `security_items_answered` | Number of security items answered, 0 to 6 |
-| `security_score` | Security-perception score 0 to 60: ((sum(odd) - 3) + (15 - sum(even))) x 2.5. Empty when no item was answered. A missing item in an otherwise answered block is scored as neutral (3), which contributes 0; this applies to one participant (P53, five of six items). |
+| `security_score` | Security-perception score 0 to 60: ((sum(odd) - 3) + (15 - sum(even))) x 2.5. Defined only for complete six-item responses; empty otherwise (seven participants answered no item and one, P53, answered five of six). |
 | `feels_safer_with_devices` | Normalized answer to "Do you feel safer performing the operation from one or two devices?": one / two / unclear; empty = not answered |
 
 ## Scoring in the co-authors' spreadsheet
@@ -51,5 +51,5 @@ difference.
 
 - Single-signature group: treatments 1 and 4 (n = 32).
 - Multi-signature group: treatments 2 and 3 (n = 35).
-- Security perception and correlation analyses use the 60 participants with
-  `security_items_answered > 0` (T1 = 14, T2 = 14, T3 = 18, T4 = 14).
+- Security perception and correlation analyses use the 59 participants with
+  `security_items_answered == 6` (T1 = 14, T2 = 13, T3 = 18, T4 = 14).

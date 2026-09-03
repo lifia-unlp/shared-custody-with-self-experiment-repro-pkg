@@ -1,5 +1,5 @@
 {
- "_comment": "Values as printed in the manuscript (Results section, Overleaf revision 155f753, 2026-08-26). Keys match output/values.json. tol = absolute tolerance used by scripts/verify.py.",
+ "_comment": "Values as printed in the manuscript (Results section, Overleaf revision 6a9dfe7, 2026-09-03). Keys match output/values.json. tol = absolute tolerance used by scripts/verify.py.",
  "sw_p": {
   "paper": 0.00018478,
   "tol": 1e-07,
@@ -268,12 +268,12 @@
   "tol": 0.005
  },
  "attrition_chi2_p": {
-  "paper": 0.24,
+  "paper": 0.14,
   "tol": 0.005
  },
  "attrition_mw_p": {
-  "paper": 0.48,
-  "tol": 0.005
+  "paper": 0.97,
+  "tol": 0.01
  },
  "sec_single_mean": {
   "paper": 42.41,
@@ -288,130 +288,63 @@
   "tol": 0.005
  },
  "sec_multi_mean": {
-  "paper": 39.69,
-  "tol": 0.005,
-  "where": "RQ3; paper uses the stored P53 score, see alt_ keys",
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+  "paper": 40.73,
+  "tol": 0.005
  },
  "sec_multi_sd": {
-  "paper": 14.66,
-  "tol": 0.005,
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+  "paper": 13.65,
+  "tol": 0.005
  },
  "sec_multi_median": {
-  "paper": 41.25,
-  "tol": 0.005
+  "paper": 42.5,
+  "tol": 1e-09
  },
  "sec_sw_single_p": {
   "paper": 0.33,
   "tol": 0.005
  },
  "sec_sw_multi_p": {
-  "paper": 0.16,
-  "tol": 0.005,
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+  "paper": 0.23,
+  "tol": 0.005
  },
  "sec_t_df": {
-  "paper": 56.8,
-  "tol": 0.05,
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+  "paper": 56.3,
+  "tol": 0.05
  },
  "sec_t": {
-  "paper": 0.82,
-  "tol": 0.005,
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+  "paper": 0.52,
+  "tol": 0.005
  },
  "sec_t_p": {
-  "paper": 0.42,
-  "tol": 0.005,
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+  "paper": 0.6,
+  "tol": 0.005
  },
  "sec_mw_U": {
-  "paper": 487.5,
+  "paper": 459.5,
   "tol": 0
  },
  "sec_mw_p": {
-  "paper": 0.56,
+  "paper": 0.7,
   "tol": 0.005
  },
  "sec_diff": {
-  "paper": 2.72,
-  "tol": 0.005,
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+  "paper": 1.68,
+  "tol": 0.005
  },
  "sec_ci_lo": {
-  "paper": -3.93,
-  "tol": 0.005,
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+  "paper": -4.76,
+  "tol": 0.005
  },
  "sec_ci_hi": {
-  "paper": 9.38,
-  "tol": 0.005,
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
+  "paper": 8.13,
+  "tol": 0.005
  },
  "sec_hedges_g": {
-  "paper": 0.21,
-  "tol": 0.005,
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value"
- },
- "sec_power_d": {
-  "paper": 0.73,
-  "tol": 0.01,
-  "where": "power/Bayes paragraph of RQ3, commented out in the manuscript since 2026-08-26"
- },
- "sec_bf01": {
-  "paper": 2.9,
-  "tol": 0.05,
-  "expected_diff": "P53 security score recomputed from items (15.0) instead of the stored 7.5; the alt_ keys reproduce the paper's value",
-  "where": "power/Bayes paragraph of RQ3, commented out in the manuscript since 2026-08-26"
- },
- "alt_sec_multi_mean": {
-  "paper": 39.69,
+  "paper": 0.13,
   "tol": 0.005
- },
- "alt_sec_multi_sd": {
-  "paper": 14.66,
-  "tol": 0.005
- },
- "alt_sec_t_df": {
-  "paper": 56.8,
-  "tol": 0.05
- },
- "alt_sec_t": {
-  "paper": 0.82,
-  "tol": 0.005
- },
- "alt_sec_t_p": {
-  "paper": 0.42,
-  "tol": 0.005
- },
- "alt_sec_mw_p": {
-  "paper": 0.56,
-  "tol": 0.005
- },
- "alt_sec_diff": {
-  "paper": 2.72,
-  "tol": 0.005
- },
- "alt_sec_ci_lo": {
-  "paper": -3.93,
-  "tol": 0.005
- },
- "alt_sec_ci_hi": {
-  "paper": 9.38,
-  "tol": 0.005
- },
- "alt_sec_hedges_g": {
-  "paper": 0.21,
-  "tol": 0.005
- },
- "alt_sec_bf01": {
-  "paper": 2.9,
-  "tol": 0.05,
-  "where": "power/Bayes paragraph of RQ3, commented out in the manuscript since 2026-08-26"
  },
  "rho_overall": {
-  "paper": 0.49,
+  "paper": 0.46,
   "tol": 0.005
  },
  "rho_T1": {
@@ -423,8 +356,9 @@
   "tol": 0.005
  },
  "rho_T2": {
-  "paper": 0.85,
-  "tol": 0.005
+  "paper": 0.81,
+  "tol": 0.005,
+  "expected_diff": "manuscript misprint: computed rho = 0.817, which rounds to 0.82 (the Discussion says 0.82); Results prints 0.81"
  },
  "rho_T3": {
   "paper": 0.53,
@@ -442,12 +376,53 @@
   "paper": 0.02,
   "tol": 0.005
  },
- "alt_rho_overall": {
-  "paper": 0.49,
+ "sec_tost_d05_p": {
+  "paper": 0.081,
+  "tol": 0.0005
+ },
+ "sec_tost_d08_p": {
+  "paper": 0.006,
+  "tol": 0.0005
+ },
+ "attrition_ffh_treatment_p": {
+  "paper": 0.13,
+  "tol": 0.01,
+  "where": "Fisher-Freeman-Halton exact by treatment; Monte Carlo, seed 0"
+ },
+ "rq1_T3_t": {
+  "paper": 1.94,
   "tol": 0.005
  },
- "alt_rho_T2": {
-  "paper": 0.85,
+ "rq1_T3_t_p": {
+  "paper": 0.035,
+  "tol": 0.0005
+ },
+ "rq1_T3_lcb": {
+  "paper": 68.6,
   "tol": 0.005
+ },
+ "rq1_T2_wilcoxon_p": {
+  "paper": 0.609,
+  "tol": 0.0005
+ },
+ "rq1_T3_wilcoxon_p": {
+  "paper": 0.065,
+  "tol": 0.0005,
+  "where": "commented caveat in RQ1"
+ },
+ "rq1_T3_sign_p": {
+  "paper": 0.407,
+  "tol": 0.0005,
+  "where": "commented caveat in RQ1"
+ },
+ "rq1_T3_holm_p": {
+  "paper": 0.07,
+  "tol": 0.0005,
+  "where": "commented caveat in RQ1"
+ },
+ "rho_T2_p": {
+  "paper": 0.001,
+  "tol": 0.001,
+  "where": "printed as p < 0.001"
  }
 }
