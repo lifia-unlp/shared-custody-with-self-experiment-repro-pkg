@@ -3,7 +3,7 @@ message: "If you use this dataset or code, please cite both the article and this
 title: "Reproduction package: Measuring the impact of multi-signature self-custody on crypto-wallet usability and security perception"
 type: dataset
 license: CC-BY-4.0
-repository-code: "https://github.com/lifia-unlp/shared-custody-with-self-experiment-repro-pgk"
+repository-code: "https://github.com/lifia-unlp/shared-custody-with-self-experiment-repro-pkg"
 # doi: 10.5281/zenodo.XXXXXXX   (to be added on deposit)
 authors:
   - family-names: Gindre

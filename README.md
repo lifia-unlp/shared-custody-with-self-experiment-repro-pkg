@@ -46,8 +46,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh     # macOS / Linux
 # or, on Windows: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 
 # 2. clone and enter the repository
-git clone https://github.com/lifia-unlp/shared-custody-with-self-experiment-repro-pgk
-cd shared-custody-with-self-experiment-repro-pgk
+git clone https://github.com/lifia-unlp/shared-custody-with-self-experiment-repro-pkg
+cd shared-custody-with-self-experiment-repro-pkg
 
 # 3. create the environment (downloads Python 3.11 if needed) and run
 uv sync
