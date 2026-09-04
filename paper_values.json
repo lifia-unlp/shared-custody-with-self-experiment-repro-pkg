@@ -1,5 +1,5 @@
 {
- "_comment": "Values as printed in the manuscript (Results section, Overleaf revision 6a9dfe7, 2026-09-03). Keys match output/values.json. tol = absolute tolerance used by scripts/verify.py.",
+ "_comment": "Values as printed in the manuscript (Results section, Overleaf revision 45d1d0c, 2026-09-03). Keys match output/values.json. tol = absolute tolerance used by scripts/verify.py.",
  "sw_p": {
   "paper": 0.00018478,
   "tol": 1e-07,
@@ -356,9 +356,8 @@
   "tol": 0.005
  },
  "rho_T2": {
-  "paper": 0.81,
-  "tol": 0.005,
-  "expected_diff": "manuscript misprint: computed rho = 0.817, which rounds to 0.82 (the Discussion says 0.82); Results prints 0.81"
+  "paper": 0.82,
+  "tol": 0.005
  },
  "rho_T3": {
   "paper": 0.53,

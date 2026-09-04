@@ -90,7 +90,7 @@
 | rho_overall | 0.46 | 0.460467 | yes |  |
 | rho_T1 | 0.61 | 0.606516 | yes |  |
 | rho_T1_p | 0.02 | 0.0214716 | yes |  |
-| rho_T2 | 0.81 | 0.817301 | differs (documented) | manuscript misprint: computed rho = 0.817, which rounds to 0.82 (the Discussion says 0.82); Results prints 0.81 |
+| rho_T2 | 0.82 | 0.817301 | yes |  |
 | rho_T3 | 0.53 | 0.534867 | yes |  |
 | rho_T3_p | 0.02 | 0.0221912 | yes |  |
 | rho_T4 | -0.61 | -0.607581 | yes |  |
@@ -107,4 +107,4 @@
 | rq1_T3_holm_p | 0.07 | 0.069521 | yes | commented caveat in RQ1 |
 | rho_T2_p | 0.001 | 0.000645604 | yes | printed as p < 0.001 |
 
-103 of 104 values match; 1 differ for a documented reason (see notes); 0 differ unexpectedly.
+104 of 104 values match; 0 differ for a documented reason (see notes); 0 differ unexpectedly.
