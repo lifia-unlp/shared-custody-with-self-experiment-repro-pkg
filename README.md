@@ -1,5 +1,7 @@
 # Reproduction package: usability of multi-signature self-custody
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22288903.svg)](https://doi.org/10.5281/zenodo.22288903)
+
 Data, scripts, and notebooks that reproduce every statistic, table, and figure
 in the Results section of:
 
@@ -208,5 +210,8 @@ for every value the manuscript reports.
 ## Citation and license
 
 This package is released under the Creative Commons Attribution 4.0
-International license (CC BY 4.0), see `LICENSE`. Please cite the article
-above and the package (`CITATION.cff`; a Zenodo DOI will be added on deposit).
+International license (CC BY 4.0), see `LICENSE`. It is archived on Zenodo:
+cite the concept DOI [10.5281/zenodo.22288903](https://doi.org/10.5281/zenodo.22288903),
+which always resolves to the latest version (v1.0.0 is
+[10.5281/zenodo.22288904](https://doi.org/10.5281/zenodo.22288904)), together
+with the article above. Citation metadata is in `CITATION.cff`.

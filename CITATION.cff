@@ -4,7 +4,8 @@ title: "Reproduction package: Measuring the impact of multi-signature self-custo
 type: dataset
 license: CC-BY-4.0
 repository-code: "https://github.com/lifia-unlp/shared-custody-with-self-experiment-repro-pkg"
-# doi: 10.5281/zenodo.XXXXXXX   (to be added on deposit)
+doi: 10.5281/zenodo.22288903
+version: 1.0.0
 authors:
   - family-names: Gindre
     given-names: Francisco
